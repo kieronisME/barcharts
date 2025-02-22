@@ -63,7 +63,7 @@ class HorizontalbarChart {
         this.mrMaxNumber = max(this.data.map((x) => x.Total));
         this.scaler = this.Width / this.mrMaxNumber;
         this.tickGap = this.Width / this.numTicks;
-
+        this.labels = this.data.map((x) => x[this.yVal])
 
 
     };
@@ -73,9 +73,25 @@ class HorizontalbarChart {
 
 
     render() {
-
         push()
         translate(this.x, this.y);
+
+        this.renderAxis();
+        this.renderBars();
+        this.renderXAxisTitle();
+        this.renderYAxisTitle();
+        pop()
+
+    }
+
+
+
+
+
+
+    renderAxis() {
+        push()
+
 
         strokeWeight(this.axisLineThickness);
         stroke(this.axisLineColour);
@@ -83,10 +99,11 @@ class HorizontalbarChart {
         line(0, 0, this.Width, 0);
         line(0, 0, 0, -this.Hight);
 
+    }
 
 
+    renderBars() {
         //////////////////////////////////////////////////////////   Y AXIS    ////////////////////////////////////////////////////
-
 
         for (let i = 0; i < this.barNum; i++) {
 
@@ -100,39 +117,23 @@ class HorizontalbarChart {
             strokeWeight(this.tickStrokeWeight);
             fill(this.tickTextColor);
 
-            //idk
-            // rect(jump, 0, this.barWidth, -colHight);
+
             rect(0, -jump - this.barWidth, barLength, this.barWidth);
 
             noStroke()
             fill(this.labelColor)
             textAlign(LEFT, CENTER);
-            let labels = this.data.map((x) => x[this.yVal])
+     
 
             push()
 
-            //idk
-            // translate(jump + this.barWidth / 2,this.labelPadding)
             translate(-this.labelPadding, -jump - this.barWidth / 2)
 
             rotate(this.labelRotation)
 
 
-            //idk
-            // text(labels[i], 0, 0)
-            text(labels[i], 0, 0)
+            text(this.labels[i], 0, 0)
             pop()
-
-            noStroke()
-            fill(this.yValColor)
-            textAlign(LEFT, CENTER);
-            text(this.yVal, this.move_Yval_xAxis, this.move_Yval_yAxis)
-
-
-
-
-
-
 
         }
         pop()
@@ -142,9 +143,7 @@ class HorizontalbarChart {
         //////////////////////////////////////////////////////////   X AXIS    ////////////////////////////////////////////////////
         // DRAWINFG MY LITTLE TICKS
 
-        // DRAWINFG MY LITTLE TICKS
         push()
-        translate(this.x, this.y);
         //change to width
 
 
@@ -162,32 +161,39 @@ class HorizontalbarChart {
             textSize(15);
             let value = this.mrMaxNumber / this.numTicks * i;
             text(value.toFixed(this.tickDecimal), i * this.tickGap, this.tickPadding);
-            
-            noStroke()
-            fill(this.yValColor)
-            textAlign(LEFT, CENTER);
-            text(this.xVal, this.move_Xval_xAxis, this.move_Xval_yAxis);
-
-
-
-
 
         }
-
-
-
-
-
         pop()
         //////////////////////////////////////////////////////////   X AXIS    ////////////////////////////////////////////////////
 
+    }
 
+
+
+
+
+    renderYAxisTitle() {
+        noStroke()
+        fill(this.yValColor)
+        textAlign(LEFT, CENTER);
+        text(this.yVal, this.move_Yval_xAxis, this.move_Yval_yAxis)
+    }
+
+    renderXAxisTitle() {
+        noStroke()
+        fill(this.yValColor)
+        textAlign(LEFT, CENTER);
+        text(this.xVal, this.move_Xval_xAxis, this.move_Xval_yAxis);
 
     }
 
 
 
 }
+
+
+
+
 
 
 
