@@ -5,11 +5,6 @@ barcahrt.js
 -add some x and y values titles 
 
 
-HorizontalbarChart.js
--serpate things into diffrent render functions 
--add some x and y values titles 
-
-
 stacked.js
 -serpate things into diffrent render functions
 -add some x and y values titles  

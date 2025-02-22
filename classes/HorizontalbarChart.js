@@ -58,7 +58,7 @@ class HorizontalbarChart {
 
 
         //logic
-        //orginaly i set it to width adn thats fine for the gaps going horizotaly but if we are going vertically then we need to calc the space it has going UP and use that to calc the gap
+        //orginaly i set it to Width adn thats fine for the gaps going horizotaly but if we are going vertically then we need to calc the space it has going UP and use that to calc the gap
         this.gap = (this.Hight - (this.data.length * this.barWidth)) / (this.data.length + 1);
         this.mrMaxNumber = max(this.data.map((x) => x.Total));
         this.scaler = this.Width / this.mrMaxNumber;
@@ -135,6 +135,12 @@ class HorizontalbarChart {
             text(this.labels[i], 0, 0)
             pop()
 
+
+
+
+
+
+
         }
         pop()
         //////////////////////////////////////////////////////////   Y AXIS    ////////////////////////////////////////////////////
@@ -144,7 +150,7 @@ class HorizontalbarChart {
         // DRAWINFG MY LITTLE TICKS
 
         push()
-        //change to width
+        //change to Width
 
 
         for (let i = 0; i <= this.numTicks; i++) {

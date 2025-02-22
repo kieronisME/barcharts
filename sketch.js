@@ -77,7 +77,7 @@ function setup() {
     }
 
 
-    //Horizontal BarChart
+    //Horizontal BarChart FINNISHED
     HorizontalbarChart01 = {
 
         //positions
@@ -98,11 +98,11 @@ function setup() {
         // - xVal
         move_Xval_xAxis: 125,
         move_Xval_yAxis: 60,
-        yValColor:"#4287f5" ,
+        yValColor: "#4287f5",
         // - xVal
         move_Yval_xAxis: -200,
         move_Yval_yAxis: -120,
-        yValColor: "#4287f5" ,
+        yValColor: "#4287f5",
 
         //lines
         axisLineThickness: 0.5,
@@ -142,41 +142,38 @@ function setup() {
     // STACKED BAR CHART
     stackedBarchart = {
 
+        //postion 
+        x: 500,
+        y: 1050,
+
+        Hight: 300,
+        Width: 600,
+
+
+
         //data
         data: cleanedData,
-        yValues: ["Male", "Female"],
-        xValue: "Age_Group",
-        yValueTotal: "Total",
+        yVal: ["Male", "Female"],
+        xVal: "Age_Group",
+        yValTotal: "Total",
+        yValTotalXpadding: 0,
+        yValTotalYpadding: 100,
 
-        //postion 
-        chartPosX: 500,
-        chartPosY: 850,
-        chartHeight: 300,
-        chartWidth: 600,
+
 
         //bars
         barWidth: 18,
         margin: 15,
-        axisThickness: 1,
+        axisLineThickness: 2,
 
         //colors
         barColour: "#FF0000",
-        axisColour: "#C9ADA7",
+        axisLineColor: "FF0500",
         axisTextColour: "#ffffff",
-
-        //logic
-        // numberOfBars: data.length,
-        // chartSideMargins: margin * 2,
-        // numberOfMetrics: yValues.length,
-        // maxValues: [],
-
-
-
-
-
-
-
-
+        barColours: [
+            "#FF5733", // orange
+            "#33FF57", // light green
+        ]
 
     }
 
