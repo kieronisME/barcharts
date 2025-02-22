@@ -1,0 +1,25 @@
+kierons really cool TODO list
+
+barcahrt.js
+-serpate things into diffrent render functions 
+-add some x and y values titles 
+
+
+HorizontalbarChart.js
+-serpate things into diffrent render functions 
+-add some x and y values titles 
+
+
+stacked.js
+-serpate things into diffrent render functions
+-add some x and y values titles  
+-add color not that disgusting red 
+-add avarage line (yippe)
+
+
+OneHunderdchart.js
+-do it lmao
+
+
+unquechart.js 
+-do it lmao

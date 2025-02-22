@@ -1,4 +1,3 @@
-
 class HorizontalbarChart {
     constructor(obj) {
         //PROPERTIES//
@@ -14,6 +13,14 @@ class HorizontalbarChart {
         this.data = obj.data;
         this.xVal = obj.xVal;
         this.yVal = obj.yVal;
+        // - xval
+        this.move_Xval_xAxis = obj.move_Xval_xAxis;
+        this.move_Xval_yAxis = obj.move_Xval_yAxis;
+        this.xValColor = obj.xValColor
+        // - yval
+        this.move_Yval_xAxis = obj.move_Yval_xAxis;
+        this.move_Yval_yAxis = obj.move_Yval_yAxis;
+        this.yValColor = obj.yValColor
 
         //lines
         this.axisLineThickness = obj.axisLineThickness;
@@ -23,6 +30,7 @@ class HorizontalbarChart {
         this.barWidth = obj.barWidth;
         this.barColor = obj.barColor;
         this.numBar = obj.numBar
+        this.barNum = this.data.length;
 
 
         //titles
@@ -48,7 +56,15 @@ class HorizontalbarChart {
         this.labelTextSize = obj.labelTextSize;
         this.labelColor = obj.labelColor;
 
-        this.barNum = this.data.length;
+
+        //logic
+        //orginaly i set it to width adn thats fine for the gaps going horizotaly but if we are going vertically then we need to calc the space it has going UP and use that to calc the gap
+        this.gap = (this.Hight - (this.data.length * this.barWidth)) / (this.data.length + 1);
+        this.mrMaxNumber = max(this.data.map((x) => x.Total));
+        this.scaler = this.Width / this.mrMaxNumber;
+        this.tickGap = this.Width / this.numTicks;
+
+
 
     };
 
@@ -68,22 +84,17 @@ class HorizontalbarChart {
         line(0, 0, 0, -this.Hight);
 
 
-        //orginaly i set it to width adn thats fine for the gaps going horizotaly but if we are going vertically then we need to calc the space it has going UP and use that to calc the gap
-        let gap = (this.Hight - (this.data.length * this.barWidth)) / (this.data.length + 1);
 
-
-        let mrMaxNumber = max(this.data.map((x) => x.Total));
-        let scaler = this.Width / mrMaxNumber;
-
+        //////////////////////////////////////////////////////////   Y AXIS    ////////////////////////////////////////////////////
 
 
         for (let i = 0; i < this.barNum; i++) {
 
-            let jump = (gap * (i + 1)) + (this.barWidth * i);
+            let jump = (this.gap * (i + 1)) + (this.barWidth * i);
 
-            // let colHight = this.data[i][this.yVal] * scaler;
+            // let colHight = this.data[i][this.xVal] * scaler;
             //this will determin how far the bar will og on the x axis
-            let barLength = this.data[i][this.yVal] * scaler;
+            let barLength = this.data[i][this.xVal] * this.scaler;
 
             stroke(this.tickColor);
             strokeWeight(this.tickStrokeWeight);
@@ -93,11 +104,10 @@ class HorizontalbarChart {
             // rect(jump, 0, this.barWidth, -colHight);
             rect(0, -jump - this.barWidth, barLength, this.barWidth);
 
-
             noStroke()
             fill(this.labelColor)
             textAlign(LEFT, CENTER);
-            let labels = this.data.map((x) => x[this.xVal])
+            let labels = this.data.map((x) => x[this.yVal])
 
             push()
 
@@ -109,38 +119,68 @@ class HorizontalbarChart {
 
 
             //idk
-            // text(labels[i], -0, 0)
+            // text(labels[i], 0, 0)
+            text(labels[i], 0, 0)
             pop()
 
+            noStroke()
+            fill(this.yValColor)
+            textAlign(LEFT, CENTER);
+            text(this.yVal, this.move_Yval_xAxis, this.move_Yval_yAxis)
+
+
+
+
+
+
+
         }
+        pop()
+        //////////////////////////////////////////////////////////   Y AXIS    ////////////////////////////////////////////////////
 
 
+        //////////////////////////////////////////////////////////   X AXIS    ////////////////////////////////////////////////////
+        // DRAWINFG MY LITTLE TICKS
 
+        // DRAWINFG MY LITTLE TICKS
+        push()
+        translate(this.x, this.y);
         //change to width
-        let tickGap = this.Width / this.numTicks;
 
 
         for (let i = 0; i <= this.numTicks; i++) {
             noFill();
             stroke(this.tickColor);
-            strokeWeight(this.tickStrokeLength);
+            strokeWeight(this.tickStrokeWeight);
 
-            //idk
-            // line(0, -i * tickGap, -this.tickStrokeLength, -i * tickGap)
-            line(i * tickGap, 0, i * tickGap, this.tickStrokeLength);
+
+            line(i * this.tickGap, 0, i * this.tickGap, this.tickStrokeLength);
 
 
             fill(this.tickTextColor);
             textAlign(CENTER, TOP);
             textSize(15);
-            let value = mrMaxNumber / this.numTicks * i;
+            let value = this.mrMaxNumber / this.numTicks * i;
+            text(value.toFixed(this.tickDecimal), i * this.tickGap, this.tickPadding);
+            
+            noStroke()
+            fill(this.yValColor)
+            textAlign(LEFT, CENTER);
+            text(this.xVal, this.move_Xval_xAxis, this.move_Xval_yAxis);
 
-            //idk
-            // text(value.toFixed(this.tickDecimal), -this.tickPadding, -i * tickGap);
-            text(value.toFixed(this.tickDecimal), i * tickGap, this.tickPadding);
+
+
+
+
         }
+
+
+
+
+
         pop()
-        pop()
+        //////////////////////////////////////////////////////////   X AXIS    ////////////////////////////////////////////////////
+
 
 
     }

@@ -45,7 +45,6 @@ class Stacked {
     }
 
 
-
     render() {
 
         // this.barColours.push(color(125, 34, 56));
