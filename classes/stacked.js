@@ -51,11 +51,13 @@ class Stacked {
         this.scaler = this.Hight / maxVal;
         this.gap = (this.Width - (numberOfBars * this.barWidth * numberOfMetrics) - chartSideMargins) / (numberOfBars - 1);
 
-console.log(this.data[1])
+
     }
 
 
     render() {
+
+        //im going to killmyself i littraly dont know how to make this stack lmao 
         push()
         translate(this.x, this.y);
         noFill();
@@ -110,12 +112,9 @@ console.log(this.data[1])
 
 
             }
-
-
-
-
             pop();
         }
+
         console.log(this.barWidth)
         push();
         textSize(30)

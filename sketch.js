@@ -62,6 +62,8 @@ function setup() {
         titleColor: "#FF0000",
         tickColor: "#4287f5",
         tickPadding: 10,
+        tickYTextPadding: 100,
+        tickXTextPadding: -100,
         tickStrokeWeight: 1,
         tickStrokeLength: 2,
         tickTextColor: "#ffffff",
@@ -72,6 +74,7 @@ function setup() {
         labelPadding: 11,
         labelRotation: 60,
         labelTextSize: 12,
+        labbleTileX: 250,
         labelColor: "#FF0000",
 
     }
