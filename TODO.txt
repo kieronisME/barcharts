@@ -1,12 +1,12 @@
 kierons really cool TODO list
 
 stacked.js
--make the damn this stacked 
+- figure out why wudth bar is so long 
 -add avarage line (yippe)
 
 
 bubble.js 
-ok i want to make a bubble chart
-figure out what data we are going to use 
+-ok i want to make a bubble chart
+-figure out what data we are going to use 
 
 

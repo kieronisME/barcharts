@@ -151,13 +151,13 @@ function setup() {
         y: 1050,
 
         Hight: 300,
-        Width: 600,
+        Width: 500,
 
 
 
         //data
         data: cleanedData,
-        yVal: ["Male", "Female"],
+        yVal: ["Female","Male"],
         xVal: "Age_Group",
         yValTotal: "Total",
         yValTotalXpadding: 0,
@@ -182,7 +182,7 @@ function setup() {
     }
 
 
-
+    //bubble chart soon
 
 
 
