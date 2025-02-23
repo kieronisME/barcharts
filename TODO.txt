@@ -1,15 +1,12 @@
 kierons really cool TODO list
 
-
-
 stacked.js
 -make the damn this stacked 
 -add avarage line (yippe)
 
 
-OneHunderdchart.js
--do it lmao
+bubble.js 
+ok i want to make a bubble chart
+figure out what data we are going to use 
 
 
-unquechart.js 
--do it lmao

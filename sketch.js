@@ -3,6 +3,7 @@ let stackedcharts = []
 let HorizontalbarCharts = [];
 let OneHunderdcharts = [];
 let cleanedData = [];
+let bubbleCharts = [];
 let data;
 
 
@@ -181,62 +182,12 @@ function setup() {
     }
 
 
-    OneHunderdchart = {
-
-        //positions
-        x: 1200,
-        y: 850,
-
-
-        //does this.width not change the width iof the bars
-        Width: 250,
-        Hight: 250,
-        margin: 0,
-
-        //data
-        //i dontundertsand how its knows that xVal and ytitle are trying to use that string to display things 
-        data: cleanedData,
-        xVal: "Age_Group",
-        yVal: "Total",
-
-        //lines
-        axisLineThickness: 0.5,
-        axisLineColour: "#F2E9E4",
-
-        //bars
-        barWidth: 15,
-        barColor: "#C9ADA7",
-
-
-        //titles
-        titleText: "Really cool title",
-        xTitleOffset: -30,
-        yTitleOffset: 20,
-
-        //ticks
-        tickDecimal: 2,
-        titleColor: "#FF0000",
-        tickColor: "#4287f5",
-        tickPadding: 10,
-        tickStrokeWeight: 1,
-        tickStrokeLength: 2,
-        tickTextColor: "#ffffff",
-        tickTextSize: 7,
-        numTicks: 5,
-
-        //labeling things
-        labelPadding: 11,
-        labelRotation: 60,
-        labelTextSize: 12,
-        labelColor: "#FF0000",
-
-    }
 
 
 
 
 
-    OneHunderdcharts.push(new OneHunderd(OneHunderdchart))
+
     stackedcharts.push(new Stacked(stackedBarchart))
     Barcharts.push(new BarChart(Barchart01))
     HorizontalbarCharts.push(new HorizontalbarChart(HorizontalbarChart01))
@@ -246,6 +197,8 @@ function setup() {
 
 function draw() {
     background(0)
+
+
 
     for (let i = 0; i < HorizontalbarCharts.length; i++) {
         HorizontalbarCharts[i].render();

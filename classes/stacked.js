@@ -50,6 +50,15 @@ class Stacked {
         console.log(maxVals);
         this.scaler = this.Hight / maxVal;
         this.gap = (this.Width - (numberOfBars * this.barWidth * numberOfMetrics) - chartSideMargins) / (numberOfBars - 1);
+        console.log(this.data)
+
+        // i need to find a way to do into data and then go through every object in the array of data and grabbing the total and then
+        // storing that in a veriable called gimmeThatDataNigga
+
+
+
+        let totalVal = this.data.map((row) => row.Total);
+        console.log(totalVal);
 
 
     }
