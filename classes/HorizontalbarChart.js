@@ -126,12 +126,8 @@ class HorizontalbarChart {
      
 
             push()
-
             translate(-this.labelPadding, -jump - this.barWidth / 2)
-
             rotate(this.labelRotation)
-
-
             text(this.labels[i], 0, 0)
             pop()
 
