@@ -1,5 +1,4 @@
-let BirthRates = [];
-let Abbreviations = [];
+let Abbreviations = {};
 let linegraphs = [];
 let data;
 
@@ -13,13 +12,11 @@ function setup() {
     angleMode(DEGREES)
 
 
-        for (let i = 0; i < 7; i++) {
-            Abbreviations.push(data.rows[i].obj.Abbreviation, data.rows[i].obj.Birth_Rate)
-        };
-
-    for (let i = 0; i < 7; i++) {
-        BirthRates.push(data.rows[i].obj.Birth_Rate)
-    };
+    for (let i = 0; i < data.getRowCount(); i++) {
+        let abbreviation = data.rows[i].obj.Abbreviation;
+        let birthRate = data.rows[i].obj.Birth_Rate;
+        Abbreviations[abbreviation] = birthRate;
+    }
 
 
 
