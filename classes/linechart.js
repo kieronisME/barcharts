@@ -1,7 +1,4 @@
-//scaler doesnt work like it should. the user has to manualy make tyhe hight be taller than the tallest bart that works but its shsould be automatic.
-//maybe if i add somthinglike TotalHight+=barHightend it will and  use tha numeber instead of maxVals in my scaler it might work but thats for later
-
-class Stacked {
+class LineGraph {
     constructor(obj) {
         //PROPERTIES//
 

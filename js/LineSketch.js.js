@@ -1,13 +1,11 @@
-let stackedcharts = []
-let cleanedData = [];
+let BirthRates = [];
+let Abbreviations = [];
+let linegraphs = [];
 let data;
 
 
-
-
-
 function preload() {
-    data = loadTable('Combined.csv', 'csv', 'header')
+    data = loadTable('world-data-2023.csv', 'csv', 'header')
 }
 
 function setup() {
@@ -15,15 +13,22 @@ function setup() {
     angleMode(DEGREES)
 
 
-    for (let i = 0; i < data.getRowCount(); i++) {
-        cleanedData.push(data.rows[i].obj)
+        for (let i = 0; i < 7; i++) {
+            Abbreviations.push(data.rows[i].obj.Abbreviation, data.rows[i].obj.Birth_Rate)
+        };
+
+    for (let i = 0; i < 7; i++) {
+        BirthRates.push(data.rows[i].obj.Birth_Rate)
     };
 
 
-    // STACKED BAR CHART
-    stackedBarchart = {
 
-        //postion 
+
+    //bubble chart soon
+    let line01 = {
+
+       
+      //postion 
         x: 900,
         y: 650,
 
@@ -56,22 +61,24 @@ function setup() {
             "#33FF57", // light green
         ]
 
-    }
+    };
 
-  
-    stackedcharts.push(new Stacked(stackedBarchart))
+
+
+    linegraphs.push(new LineGraph(line01))
+
 
 }
 
 function draw() {
     background(0)
 
-    for (let i = 0; i < stackedcharts.length; i++) {
-        stackedcharts[i].render();
+    for (let i = 0; i < linegraphs.length; i++) {
+        linegraphs[i].render();
     }
-
-
 }
+
+
 
 
 
