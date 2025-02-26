@@ -13,6 +13,13 @@ class HorizontalbarChart {
         this.data = obj.data;
         this.xVal = obj.xVal;
         this.yVal = obj.yVal;
+
+        //data colors
+        this.ValColor = obj.ValColor,
+        this.ValStrokeColor = obj.ValStrokeColor,
+        this.ValStrokeWieght = obj.ValStrokeWieght,
+
+
         // - xval
         this.move_Xval_xAxis = obj.move_Xval_xAxis;
         this.move_Xval_yAxis = obj.move_Xval_yAxis;
@@ -24,13 +31,18 @@ class HorizontalbarChart {
 
         //lines
         this.axisLineThickness = obj.axisLineThickness;
+
+        //line colors
         this.axisLineColour = obj.axisLineColour;
 
         //bars
         this.barWidth = obj.barWidth;
-        this.barColor = obj.barColor;
         this.numBar = obj.numBar
         this.barNum = this.data.length;
+
+        //bar color
+        this.barColor = obj.barColor;
+        this.barStrokeColor = obj.barStrokeColor
 
 
         //titles
@@ -41,20 +53,29 @@ class HorizontalbarChart {
         //ticks
         this.numTicks = obj.numTicks;
         this.tickDecimal = obj.tickDecimal;
-        this.titleColor = obj.titleColor;
-        this.tickColor = obj.tickColor;
         this.tickPadding = obj.tickPadding;
         this.tickStrokeWeight = obj.tickStrokeWeight;
         this.tickStrokeLength = obj.tickStrokeLength;
-        this.tickTextColor = obj.tickTextColor;
         this.tickTextSize = obj.tickTextSize;
+
+        //tick color
+        this.tickTextColor = obj.tickTextColor;
+        this.tickColor = obj.tickColor;
+        this.tickColor = obj.tickColor;
+
 
 
         //labeling things
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
         this.labelTextSize = obj.labelTextSize;
+
+        //label color
+        this.labelStrokeColor = obj.labelStrokeColor;
         this.labelColor = obj.labelColor;
+
+        //text
+        this.textSize = obj.textSize
 
 
         //logic
@@ -71,11 +92,10 @@ class HorizontalbarChart {
 
 
 
-
+    // render all my render functiona
     render() {
         push()
         translate(this.x, this.y);
-
         this.renderAxis();
         this.renderBars();
         this.renderXAxisTitle();
@@ -88,11 +108,9 @@ class HorizontalbarChart {
 
 
 
-
+    //render my axis lines
     renderAxis() {
         push()
-
-
         strokeWeight(this.axisLineThickness);
         stroke(this.axisLineColour);
 
@@ -109,25 +127,24 @@ class HorizontalbarChart {
 
             let jump = (this.gap * (i + 1)) + (this.barWidth * i);
 
-            // let colHight = this.data[i][this.xVal] * scaler;
             //this will determin how far the bar will og on the x axis
             let barLength = this.data[i][this.xVal] * this.scaler;
 
-            stroke(this.tickColor);
-            strokeWeight(this.tickStrokeWeight);
+            stroke(this.barStrokeColor);
             fill(this.tickTextColor);
 
-
+            // draw bar
             rect(0, -jump - this.barWidth, barLength, this.barWidth);
 
             noStroke()
             fill(this.labelColor)
             textAlign(LEFT, CENTER);
-     
 
+            //ages
             push()
             translate(-this.labelPadding, -jump - this.barWidth / 2)
             rotate(this.labelRotation)
+            //draw them
             text(this.labels[i], 0, 0)
             pop()
 
@@ -143,18 +160,15 @@ class HorizontalbarChart {
 
 
         //////////////////////////////////////////////////////////   X AXIS    ////////////////////////////////////////////////////
-        // DRAWINFG MY LITTLE TICKS
 
+        //ticks
         push()
-        //change to Width
-
-
         for (let i = 0; i <= this.numTicks; i++) {
             noFill();
             stroke(this.tickColor);
             strokeWeight(this.tickStrokeWeight);
 
-
+            //drawing ticks
             line(i * this.tickGap, 0, i * this.tickGap, this.tickStrokeLength);
 
 
@@ -173,17 +187,18 @@ class HorizontalbarChart {
 
 
 
-
+    // total
     renderYAxisTitle() {
-        noStroke()
-        fill(this.yValColor)
+        stroke(this.ValStrokeColor)
+        fill(this.ValColor)
         textAlign(LEFT, CENTER);
         text(this.yVal, this.move_Yval_xAxis, this.move_Yval_yAxis)
     }
 
+    // age group
     renderXAxisTitle() {
-        noStroke()
-        fill(this.yValColor)
+        stroke(this.ValStrokeColor)
+        fill(this.ValColor)
         textAlign(LEFT, CENTER);
         text(this.xVal, this.move_Xval_xAxis, this.move_Xval_yAxis);
 

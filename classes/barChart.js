@@ -12,19 +12,29 @@ class BarChart {
 
         //data
         this.data = obj.data;
+        this.ValColor = obj.ValColor
         this.xVal = obj.xVal;
         this.yVal = obj.yVal;
         this.barNum = this.data.length;
 
-        //lines
-        this.axisLineThickness = obj.axisLineThickness;
+        //data colors
+        this.ValColor = obj.ValColor,
+            this.ValStrokeColor = obj.ValStrokeColor,
+            this.ValStrokeWieght = obj.ValStrokeWieght,
+
+            //lines
+            this.axisLineThickness = obj.axisLineThickness;
+
+        //line colors
         this.axisLineColour = obj.axisLineColour;
 
         //bars
         this.barWidth = obj.barWidth;
-        this.barColor = obj.barColor;
         this.numBar = obj.numBar
 
+        //bar color
+        this.barColor = obj.barColor;
+        this.barStrokeColor = obj.barStrokeColor
 
         //titles
         this.titleText = obj.titleText;
@@ -34,56 +44,55 @@ class BarChart {
         //ticks
         this.numTicks = obj.numTicks;
         this.tickDecimal = obj.tickDecimal;
-        this.titleColor = obj.titleColor;
-        this.tickColor = obj.tickColor;
         this.tickYTextPadding = obj.tickYTextPadding;
         this.tickXTextPadding = obj.tickXTextPadding
         this.tickPadding = obj.tickPadding;
         this.tickStrokeWeight = obj.tickStrokeWeight;
         this.tickStrokeLength = obj.tickStrokeLength;
-        this.tickTextColor = obj.tickTextColor;
+
         this.tickTextSize = obj.tickTextSize;
+
+        //tick color
+        this.tickTextColor = obj.tickTextColor;
+        this.tickColor = obj.tickColor;
+        this.tickColor = obj.tickColor;
 
 
         //labeling things
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
         this.labelTextSize = obj.labelTextSize;
-        this.labelColor = obj.labelColor;
         this.labbleTileX = obj.labbleTileX
 
+        //label color
+        this.labelStrokeColor = obj.labelStrokeColor;
+        this.labelColor = obj.labelColor;
 
+        //text
+        this.textSize = obj.textSize
 
         //logic
         //figure out this bracket part beacuse its wierd
         this.gap = (this.Width - (this.data.length * this.barWidth)) / (this.data.length + 1);
-        //i promise you i dont know how this function works. WTF IS X NIGGA? when i come back i'll figure it out
+
+        //max goes through all the total numbers and picks the biggest one for mrMaxNumber
         this.mrMaxNumber = max(this.data.map((x) => x.Total));
 
-        // console.log(mrMaxNumber);
-        //learn scalers in more detail
+        //divides so no matter what the max number is will never be taller than this.Hight
         this.scaler = this.Hight / this.mrMaxNumber;
-        // console.log(scaler);
 
-        //this is to find out how much space between ticks there should be. so if hight(the total number) was 100 and the numticks was 2 then tick gap would be 50. meaning there should be a gap of 50 between each.
-        // when this goes through the for loop it will space all of the tick evenly by multipying the number of ticks by the number in tick gap 
+        //sees how much space is aviable to use for ticks 
         this.tickGap = this.Hight / this.numTicks;
 
 
     };
 
 
-    // marginf left and right calc
-    // adjusting y bar line to be max data.
-    // i want the x axis to be a little onger than the last bar always
-    // i want it so when you increas the amount in comibedcvs the x and y ajust 
 
-
-
+    //renders all my renders 
     render() {
         push()
         translate(this.x, this.y);
-
         this.renderAxis();
         this.renderBars();  // X axis 
         this.renderTicks();  // Y axis 
@@ -92,7 +101,7 @@ class BarChart {
 
 
 
-
+    //lines
     renderAxis() {
         push()
         strokeWeight(this.axisLineThickness);
@@ -105,34 +114,50 @@ class BarChart {
 
     }
 
-
+    //bars
     renderBars() {
-        //x Axis
+
+        //X Axis
         for (let i = 0; i < this.barNum; i++) {
 
             let jump = (this.gap * (i + 1)) + (this.barWidth * i);
             let colHight = this.data[i][this.yVal] * this.scaler;
 
-            stroke(this.tickColor);
-            strokeWeight(this.tickStrokeWeight);
-            fill(this.tickTextColor);
 
+            //bars color
+            stroke(this.barStrokeColor);
+            strokeWeight(this.tickStrokeWeight);
+            fill(this.barColor);
+
+            //bar
             rect(jump, 0, this.barWidth, -colHight);
+
+
+            //bar text
             noStroke()
             fill(this.labelColor)
             textAlign(LEFT, CENTER);
             let labels = this.data.map((x) => x[this.xVal])
 
+
+            //bar lables 
             push()
             translate(jump + this.barWidth / 2, this.labelPadding)
             rotate(this.labelRotation)
-
+            textSize(this.textSize)
             text(labels[i], 0, 0)
-
             pop()
 
+
+            //age groups
             push()
+
             translate(this.barWidth / 2, this.labbleTileX)
+            stroke(this.ValStrokeColor)
+            strokeWeight(this.ValStrokeWieght);
+            fill(this.ValColor)
+
+            textSize(this.textSize)
             text(this.xVal, -this.tickXTextPadding, -this.Width / 2);
             pop()
 
@@ -142,7 +167,7 @@ class BarChart {
     }
 
 
-
+    //ticks
     renderTicks() {
 
         // Y axis 
@@ -150,25 +175,28 @@ class BarChart {
             noFill();
             stroke(this.tickColor);
             strokeWeight(this.tickStrokeLength);
+
+            // draw ticks
             //                         - to draw to the left
             line(0, -i * this.tickGap, -this.tickStrokeLength, -i * this.tickGap)
 
 
-            // noStroke();
-            fill(this.tickTextColor);
+            stroke(this.ValStrokeColor);
+            strokeWeight(this.ValStrokeWieght);
             textAlign(RIGHT, CENTER);
             textSize(15);
             let value = this.mrMaxNumber / this.numTicks * i;
+
+            //tick numbers yippeeeee
             text(value.toFixed(this.tickDecimal), -this.tickPadding, -i * this.tickGap);
 
-
-
-            // console.log("hi",this.Hight/2)
         }
 
+        
+        stroke(this.ValStrokeColor);
+        strokeWeight(this.ValStrokeWieght);
+        //total lable
         text(this.yVal, -this.tickYTextPadding, -this.Hight / 2);
-
-        pop()
 
         // draw ticks 
         // 1:
@@ -180,9 +208,6 @@ class BarChart {
         // the starting points of my ticks is 0, -i * tickGap, and the end point is this -this.tickStrokeLength, -i * tickGap)
         // -i * tickGap ensures that my ticks are spced out evenly.
         //
-
-
-        pop()
     }
 
 }

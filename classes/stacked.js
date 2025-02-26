@@ -17,6 +17,9 @@ class Stacked {
         this.yValTotalXpadding = obj.yValTotalXpadding;
         this.yValTotalYpadding = obj.yValTotalYpadding;
 
+        //line
+        this.axisLineThickness = obj.axisLineThickness;
+        this.axisLineColour = obj.axisLineColour;
 
         this.Hight = obj.Hight;
         this.Width = obj.Width;
@@ -26,6 +29,8 @@ class Stacked {
         this.barWidth = obj.barWidth;
         this.margin = obj.margin;
         this.axisLineThickness = obj.axisLineThickness;
+
+
 
         //colors
         this.axisLineColor = obj.axisLineColor;
@@ -37,8 +42,27 @@ class Stacked {
             "#33FF57", //  light green
         ];
 
+
+        //ticks
+
+        this.tickHightArr = [];
+        this.numTicks = obj.numTicks;
+        this.tickDecimal = obj.tickDecimal;
+
+
+
+
+
+
+
+
+
+
+
+
         //grab the highest total 
         let mrMaxNumber = max(this.data.map((x) => x.Total));
+        // console.log(mrMaxNumber)
 
         //allows it so no matter what the highest number is it wont be higher than Hight
         this.scaler = this.Hight / mrMaxNumber;
@@ -46,8 +70,7 @@ class Stacked {
         this.gap = (this.Hight - (this.data.length * this.barWidth)) / (this.data.length + 1);
 
         let TotalArray = [];
-        // console.log("female array", TotalArray[0])
-        // console.log("male array", TotalArray[1])
+
 
 
 
@@ -55,10 +78,7 @@ class Stacked {
             TotalArray.push(this.data.map((row) => row[total]));
         });
 
-        //  function totalArr(TotalArray[0]){
 
-
-        //  }
 
 
 
@@ -94,7 +114,7 @@ class Stacked {
         rect(-this.Width, -this.Hight, 50, 50)
         fill(this.barColours[1])
         rect(-this.Width, -this.Hight + 100, 50, 50)
-        text(this.yVal[0], -this.Hight + 50, -170)
+        text(this.yVal[1], -this.Hight + 50, -170)
         text(this.yVal[0], -this.Hight + 50, -270)
         pop()
 
@@ -104,6 +124,62 @@ class Stacked {
 
 
 
+
+        push();
+        stroke(255, 0, 0);
+        strokeWeight(1); // Make the average line thicker
+        text("avg", -30, -this.avg, -this.Width); // Draw the average line
+        line(0, -this.avg, this.Width, -this.avg); // Draw the average line
+        pop();
+
+        let sum = 0;
+
+        //avg
+        
+
+
+
+        for (let InnerLoopCount = 0; InnerLoopCount < this.data.length; InnerLoopCount++) {
+
+            noStroke();
+
+            let barHightendnoScaler = this.data[InnerLoopCount].Total * this.scaler;
+
+
+
+            this.tickHightArr.push(barHightendnoScaler)
+            // console.log(this.tickHightArr);
+
+
+
+
+        }
+
+
+        // draw ticks and numbers
+        for (let i = 0; i < this.tickHightArr.length; i++) {
+            console.log(this.tickHightArr)
+            strokeWeight(this.axisLineThickness);
+            stroke(this.axisLineColour);
+            line(0, -this.tickHightArr[i], this.Width, -this.tickHightArr[i])
+            push();
+            noStroke()
+            fill(this.axisLineColor)
+            rotate(0)
+            textSize(10)
+            text(this.tickHightArr[i].toFixed(this.tickDecimal), -this.Width / 8, -this.tickHightArr[i]);
+
+            pop()
+        }
+
+           //avg    
+        for (let i = 0; i < this.tickHightArr.length; i++) {
+            sum += this.tickHightArr[i];
+        }
+
+        this.avg = sum / this.tickHightArr.length;
+     
+     
 
 
 
@@ -150,12 +226,13 @@ class Stacked {
         // and to make sure the next age group bars start at drawing at where y = 0 we set barHightstart back to 0  
 
 
-
+        //hold all the hights 
 
         for (let outerLoopCount = 0; outerLoopCount < this.data.length; outerLoopCount++) {
             push();
 
             translate((this.gap + this.barWidth) * outerLoopCount, 0);
+
 
             let barHightstart = 0;
 
@@ -168,6 +245,7 @@ class Stacked {
 
 
                 let barHightend = this.data[outerLoopCount][this.yVal[InnerLoopCount]] * this.scaler;
+                // let barHightendnoScaler = this.data[outerLoopCount][this.data.total] * this.scaler;
 
                 rect(0, -barHightstart, this.barWidth, -barHightend);
 
@@ -175,11 +253,17 @@ class Stacked {
                 // tickhight.push(barHightend);
 
                 barHightstart += barHightend;
+                // this.tickHightArr.push(barHightendnoScaler)
+                console.log(this.tickHightArr);
 
-                // console.log(tickhight);
 
 
             }
+
+
+
+
+
 
 
             // the main goal is to have an array thtat has all ther higtes and use that to print out ticks on the y axis 
@@ -204,19 +288,33 @@ class Stacked {
 
 
 
+        // for (let i = 0; i < this.tickHightArr.length; i++) {
+        //     line(this.tickHightArr[i], this.tickHightArr[i],5,this.Width);
+
+        // }
+
+        // console.log(this.tickHightArr);
+
+
+
+        /////////// Y ticks //////////////
+
+
         push();
-        textSize(30)
-        translate(this.Width / 2, 10);
-        rotate(360);
-        text(this.yValTotal, this.yValTotalXpadding, this.yValTotalYpadding);
+        stroke(this.axisLineColor);
+        strokeWeight(this.axisLineThickness);
+
+        push();
+        stroke(this.axisLineColor);
+        strokeWeight(this.axisLineThickness);
+
+
+
+
         pop();
 
-
         pop();
         pop();
-
-
-
 
     }
 

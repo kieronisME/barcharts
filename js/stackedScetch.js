@@ -34,37 +34,43 @@ function setup() {
 
         //data
         data: cleanedData,
-        yVal: ["Female","Male"],
+        yVal: ["Female", "Male"],
         xVal: "Age_Group",
-        yValTotal: "Total",
+        yValTotal: "you must BOUNCE ON IT",
         yValTotalXpadding: 0,
         yValTotalYpadding: 100,
 
+        //line
+        axisLineColour: "#000000",
 
 
         //bars
         barWidth: 18,
         margin: 15,
         axisLineThickness: 2,
-
+        numTicks: 11,
         //colors
         barColour: "#FF0000",
-        axisLineColor: "FF0500",
+        axisLineColor: "#000000",
         axisTextColour: "#ffffff",
         barColours: [
-            "#FF5733", // orange
-            "#33FF57", // light green
-        ]
+            "#C4E7D4", // orange
+            "#B098A4", // light green
+        ],
+
+        //ticks
+        tickDecimal: 0,
+
 
     }
 
-  
+
     stackedcharts.push(new Stacked(stackedBarchart))
 
 }
 
 function draw() {
-    background(0)
+    background('#FAF9F6')
 
     for (let i = 0; i < stackedcharts.length; i++) {
         stackedcharts[i].render();
